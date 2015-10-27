@@ -2,7 +2,7 @@
  * angular-ui-bootstrap
  * http://angular-ui.github.io/bootstrap/
 
- * Version: 0.14.3 - 2015-10-23
+ * Version: 0.14.3-ie8.1 - 2015-10-27
  * License: MIT
  */
 angular.module("ui.bootstrap", ["ui.bootstrap.collapse","ui.bootstrap.accordion","ui.bootstrap.alert","ui.bootstrap.buttons","ui.bootstrap.carousel","ui.bootstrap.dateparser","ui.bootstrap.position","ui.bootstrap.datepicker","ui.bootstrap.dropdown","ui.bootstrap.stackedMap","ui.bootstrap.modal","ui.bootstrap.pagination","ui.bootstrap.tooltip","ui.bootstrap.popover","ui.bootstrap.progressbar","ui.bootstrap.rating","ui.bootstrap.tabs","ui.bootstrap.timepicker","ui.bootstrap.typeahead"]);
@@ -23,7 +23,7 @@ angular.module('ui.bootstrap.collapse', [])
               addClass: 'in',
               easing: 'ease',
               to: { height: element[0].scrollHeight + 'px' }
-            }).start().finally(expandDone);
+            }).start()['finally'](expandDone);
           } else {
             $animate.addClass(element, 'in', {
               to: { height: element[0].scrollHeight + 'px' }
@@ -58,7 +58,7 @@ angular.module('ui.bootstrap.collapse', [])
             $animateCss(element, {
               removeClass: 'in',
               to: {height: '0'}
-            }).start().finally(collapseDone);
+            }).start()['finally'](collapseDone);
           } else {
             $animate.removeClass(element, 'in', {
               to: {height: '0'}
@@ -4168,8 +4168,7 @@ angular.module('ui.bootstrap.modal', ['ui.bootstrap.stackedMap'])
             }, function resolveError(reason) {
               modalOpenedDeferred.reject(reason);
               modalResultDeferred.reject(reason);
-            })
-            .finally(function() {
+  	    })['finally'](function() {
               if (promiseChain === samePromise) {
                 promiseChain = null;
               }
